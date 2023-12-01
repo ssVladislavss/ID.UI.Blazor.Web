@@ -1,0 +1,19 @@
+﻿@inherits IDLayoutComponent
+
+<MudThemeProvider Theme="Theme" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar>
+        @AppTitle
+    </MudAppBar>
+    <MudDrawer Open="true">
+        <WebNavMenuComponent />
+    </MudDrawer>
+    <MudMainContent Class="my-0 mt-2">
+        <MudContainer MaxWidth="MaxWidth.ExtraLarge">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
