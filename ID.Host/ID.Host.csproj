@@ -11,4 +11,9 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.13" PrivateAssets="all" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\ID.UI.Library\ID.UI.Components\ID.UI.Components.csproj" />
+    <ProjectReference Include="..\..\ID.UI.Library\ID.UI.Providers\ID.UI.Providers.csproj" />
+  </ItemGroup>
+
 </Project>
