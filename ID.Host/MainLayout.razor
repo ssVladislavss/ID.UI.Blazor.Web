@@ -5,15 +5,24 @@
 <MudSnackbarProvider />
 
 <MudLayout>
-    <MudAppBar>
-        @AppTitle
-    </MudAppBar>
-    <MudDrawer Open="true">
-        <WebNavMenuComponent />
-    </MudDrawer>
-    <MudMainContent Class="my-0 mt-2">
-        <MudContainer MaxWidth="MaxWidth.ExtraLarge">
-            @Body
-        </MudContainer>
-    </MudMainContent>
+    <AuthorizeView Roles="root_admin">
+        <Authorized>
+            <MudAppBar Color="Color.Primary">
+                @AppTitle
+                <MudSpacer />
+                <LogoutFab Size="Size.Small" DisableElevation="true" />
+            </MudAppBar>
+            <MudDrawer Open="true">
+                <WebNavMenuComponent />
+            </MudDrawer>
+            <MudMainContent Class="my-0 mt-2">
+                <MudContainer MaxWidth="MaxWidth.ExtraLarge">
+                    @Body
+                </MudContainer>
+            </MudMainContent>
+        </Authorized>
+        <NotAuthorized>
+            <Login />
+        </NotAuthorized>
+    </AuthorizeView>
 </MudLayout>
