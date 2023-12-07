@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 
 namespace ID.Host.Infrastracture.Components.Base
 {
     public class IDLayoutComponent : LayoutComponentBase
     {
-        [CascadingParameter] Task<AuthenticationState>? State { get; set; }
         [Inject] protected NavigationManager? Location { get; set; }
+
+        protected bool CurrentThemeMode {  get; set; }
 
         protected string AppTitle
         {
@@ -20,29 +20,28 @@ namespace ID.Host.Infrastracture.Components.Base
                     "/resources" => "Ресурсы приложений",
                     "/scopes" => "Области доступа приложений",
                     "/login" => "Вход",
-                    _ => "Не определено",
+                    "/forbidden" => "403 - доступ запрещён",
+                    "/unauthorized" => "401 - unauthorized",
+                    "/roles" => "Роли",
+                    "/users" => "Пользователи",
+                    _ => "Страница не найдена",
                 };
             }
         }
-        protected MudTheme Theme => new MudTheme()
+
+        [Obsolete("mud blazor palette is obsolete")]
+        protected static MudTheme Theme => new()
         {
             Palette = new Palette()
             {
                 Primary = new MudBlazor.Utilities.MudColor("#5941a7"),
-                Error = new MudBlazor.Utilities.MudColor("#b43d41")
+                Error = new MudBlazor.Utilities.MudColor("#b43d41"),
             }
         };
 
-        //protected override async Task OnParametersSetAsync()
-        //{
-        //    if(State != null)
-        //    {
-        //        var user = await State;
-        //        if (user.User.Identity == null || !user.User.Identity.IsAuthenticated)
-        //            Location!.NavigateTo("/login");
-        //    }
-
-        //    await base.OnParametersSetAsync();
-        //}
+        protected void ChangeThemeMode(bool newThemeMode)
+        {
+            CurrentThemeMode = newThemeMode;
+        }
     }
 }

@@ -8,6 +8,8 @@ using ID.UI.Core.ApiScopes.Abstractions;
 using ID.UI.Core.Clients;
 using ID.UI.Core.Clients.Abstractions;
 using ID.UI.Core.Options;
+using ID.UI.Core.Roles;
+using ID.UI.Core.Roles.Abstractions;
 using ID.UI.Core.State;
 using ID.UI.Core.State.Abstractions;
 using ID.UI.Core.Users;
@@ -15,6 +17,7 @@ using ID.UI.Core.Users.Abstractions;
 using ID.UI.Providers.API.ID.ApiResources;
 using ID.UI.Providers.API.ID.ApiScopes;
 using ID.UI.Providers.API.ID.Clients;
+using ID.UI.Providers.API.ID.Roles;
 using ID.UI.Providers.API.ID.Users;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
@@ -32,11 +35,13 @@ builder.Services.AddScoped<IApiResorceProvider, ApiResourceProvider>();
 builder.Services.AddScoped<IApiScopeProvider, ApiScopeProvider>();
 builder.Services.AddScoped<IClientProvider, ClientProvider>();
 builder.Services.AddScoped<IUserProvider, UserProvider>();
+builder.Services.AddScoped<IRoleProvider, RoleProvider>();
 
 builder.Services.AddScoped<IApiResourceService, ApiResourceService>();
 builder.Services.AddScoped<IApiScopeService, ApiScopeService>();
 builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IRoleService, RoleService>();
 
 builder.Services.AddScoped<IDStateProvider>();
 builder.Services.AddScoped<AuthenticationStateProvider>(opt => opt.GetRequiredService<IDStateProvider>());
@@ -45,6 +50,10 @@ builder.Services.AddScoped<IStateService, StateService>();
 builder.Services.Configure<StateOptions>(options =>
 {
     builder.Configuration.GetSection(StateOptions.StateKey).Bind(options);
+});
+builder.Services.Configure<ApiOptions>(options =>
+{
+    builder.Configuration.GetSection(ApiOptions.ApiKey).Bind(options);
 });
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddAuthorizationCore();

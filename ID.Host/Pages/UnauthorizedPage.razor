@@ -1,0 +1,38 @@
+﻿@page "/unauthorized"
+
+@inject NavigationManager location
+
+<PageTitle>401 - unauthorized</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.Small" Style="width: 100%;
+                                                height: 100%;
+                                                position: fixed;
+                                                left: 50%;
+                                                margin-right: -50%;
+                                                display: flex;
+                                                justify-content: center;
+                                                overflow: auto;
+                                                flex-direction: column;
+                                                transform: translate(-50%, 0)">
+     <MudStack Spacing="4">
+        <MudText Align="Align.Center" Color="Color.Primary" Typo="Typo.h1">401</MudText>
+        <MudDivider />
+        <MudText Align="Align.Center" Typo="Typo.h6">Срок действия токена авторизации истек. Сейчас Вы будете направлены на страницу авторизации!</MudText>
+     </MudStack>
+    @{
+        OnAfterRenderAsync(false);
+    }
+</MudContainer>
+
+@code{
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender)
+        {
+            await Task.Delay(3000);
+            location.NavigateTo("/", true);
+        }
+
+        await base.OnAfterRenderAsync(firstRender);
+    }
+}

@@ -1,6 +1,6 @@
 ﻿@inherits IDLayoutComponent
 
-<MudThemeProvider Theme="Theme" />
+<MudThemeProvider Theme="Theme" IsDarkMode="CurrentThemeMode" />
 <MudDialogProvider />
 <MudSnackbarProvider />
 
@@ -10,10 +10,12 @@
             <MudAppBar Color="Color.Primary">
                 @AppTitle
                 <MudSpacer />
+                <ID.UI.Components.Base.Mode.AppModeFab ChangedCallback="ChangeThemeMode" />
                 <LogoutFab Size="Size.Small" DisableElevation="true" />
             </MudAppBar>
             <MudDrawer Open="true">
-                <WebNavMenuComponent />
+                <WebNavMenuComponent>
+                </WebNavMenuComponent>
             </MudDrawer>
             <MudMainContent Class="my-0 mt-2">
                 <MudContainer MaxWidth="MaxWidth.ExtraLarge">
@@ -25,6 +27,7 @@
             <ID.UI.Components.Base.ServerLoading Show="true" />
         </Authorizing>
         <NotAuthorized>
+            <ID.UI.Components.Base.Mode.AppModeFab ChangedCallback="ChangeThemeMode" Visible="false" />
             <Login />
         </NotAuthorized>
     </AuthorizeView>
