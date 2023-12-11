@@ -20,7 +20,7 @@
         <MudText Align="Align.Center" Typo="Typo.h6">Срок действия токена авторизации истек. Сейчас Вы будете направлены на страницу авторизации!</MudText>
      </MudStack>
     @{
-        OnAfterRenderAsync(false);
+        Task.Run(async () => await OnAfterRenderAsync(false));
     }
 </MudContainer>
 
